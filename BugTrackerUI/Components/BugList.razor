@@ -1,5 +1,7 @@
 ﻿<h3>All Bugs</h3>
 
+@using System.Linq
+
 <table>
     <thead>
         <tr>
@@ -24,15 +26,14 @@
 
 
 @code {
-
+    
     [Inject]
     public IBugService BugService { get; set; }
 
     public List<Bug> Bugs { get; set; } = new List<Bug>();
 
-    protected void OnInitialized()
-    {
-        base.OnInitialized();
+    protected override void OnInitialized()
+    {        
         Bugs = BugService.GetBugs().OrderBy(x => x.Priority).ToList();
     }
 }
